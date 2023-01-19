@@ -2,35 +2,51 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 
-#define SCREEN_WIDTH 128
-#define SCREEN_HEIGHT 64
+//Экран
+Adafruit_SSD1306 display(128, 64, &Wire, -1);
 
-Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
-
-static const byte image_data_Saraarray[64]={
+//Побайтовый массив на вывод 
+//(zeenarg): ОН ВИДАТЬ САМЫЙ ЖИРНЫЙ В ОПЕРАТИВКЕ, И НЕ ВИЖУ НИ ОДНОГО МЕТОДА КУДА ЕГО МОЖНО ЗАПИХНУТЬ)
+//(zeenarg): https://adafruit.github.io/Adafruit_SSD1306/html/class_adafruit___s_s_d1306.html)
+/*static const byte image_data_Saraarray[64]=
+{
 0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,
 0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,
 0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,
 0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe,0xfe
-};
- 
-void setup() {
+};*/
+
+
+//Предварительный настройки
+void setup() 
+{
+  //Бодрейт
   Serial.begin(115200);
- 
-  if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
+
+  //Проверка связи с экраном
+  if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) 
+  {
+    //Вывод ошибки.
     Serial.println(F("SSD1306 allocation failed"));
-    for(;;);
+    //Уходим в небытье
+    //(zeenarg): ТАК ПРИВЫЧНЕЙ, КОГДА ЧЕРЕЗ WHILE, А В БЕСК. ЦИКЛЫ НУЖНО ХОТЯ БЫ ЧТО-ТО КИНУТЬ
+    while(true)
+    {
+      delay(500);
+      Serial.println(F("I'am here"));
+    }
   }
   delay(2000); 
- 
- 
+
+  //Чистим, пишем, кидаем на экран
   display.clearDisplay();
-  
-  
-  display.write("ffff");
+  display.write("Hello World!");
   display.display();
 }
- 
-void loop() {
-  
+
+
+//Повтор
+void loop() 
+{
+  delay(500);
 }
