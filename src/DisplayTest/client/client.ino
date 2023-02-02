@@ -4,7 +4,8 @@
 #include <Adafruit_SSD1306.h>
 
 
-//Пин сброса
+//Экземпляр "дисплея"
+//https://adafruit.github.io/Adafruit_SSD1306/html/class_adafruit___s_s_d1306.html)
 Adafruit_SSD1306 display(4);
 
 
