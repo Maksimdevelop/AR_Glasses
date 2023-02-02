@@ -15,22 +15,29 @@ void setup()
   Serial.begin(115200);
   //Запуск экрана
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
-  display.clearDisplay();
 }
 
 
 //Метод-цикл
 void loop() 
 {
-  //display.flush(); — возможно надо вычищать поток с дисплеем
+  //ПОПРОБУЙ ТАК!
+  refresh();
   if(Serial.available())
   {
-    display.clearDisplay();
     display.setTextSize(2);
     display.setTextColor(WHITE);
-    display.setCursor(0,0);
     display.display();
     delay(100);
     //display.println(Serial.read());
   }
+}
+
+
+//Очистить экран
+void refresh()
+{
+  display.flush();
+  display.clearDisplay();
+  display.setCursor(0,0);
 }
